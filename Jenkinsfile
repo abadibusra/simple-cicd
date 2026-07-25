@@ -12,6 +12,23 @@ pipeline {
             }
         }
 
+        stage('Setup') {
+	    steps {
+		sh '''
+		    python3 -m venv .venv
+		    . .venv/bin/activate
+		    pip install -r requirements.txt -r requirements-dev.txt
+		'''
+	    }
+	}
+	stage('Lint') {
+	    steps {
+		sh '''
+		    . .venv/bin/activate
+		    ruff check app/ tests/
+		'''
+	    }
+	}
         stage('Test') {
             steps {
                 sh '''
