@@ -26,10 +26,6 @@ Test → Build Image → Deploy → cleanup
 | Deploy | docker | replaces the running container with the new version |
 | post/always | shell | notifications + image retention cleanup |
 
-## Key decisions
-
-(write 3-4 of these in your own words — see below)
-
 ## Tech
 
 Jenkins (declarative pipeline, pipeline-as-code) · Docker · Python/Flask ·
