@@ -27,6 +27,15 @@ pipeline {
                 sh 'docker build -t simple-cicd:${BUILD_NUMBER} .'
             }
         }
+        stage('Deploy') {
+            steps {
+                sh '''
+                    docker stop myapp || true
+                    docker rm myapp || true
+                    docker run -d -p 5000:5000 --name myapp simple-cicd:${BUILD_NUMBER}
+                '''
+            }
+        }
 
     }
 }
