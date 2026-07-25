@@ -53,9 +53,9 @@ pipeline {
                 '''
             }
         }
-	    post {
-		success {
-		    echo "Build ${BUILD_NUMBER} deployed successfully"
+	post {
+           success {
+		echo "Build ${BUILD_NUMBER} deployed successfully"
 		}
 		failure {
 		    echo "Build ${BUILD_NUMBER} FAILED — check the stage that went red"
