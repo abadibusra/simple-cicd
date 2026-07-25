@@ -66,7 +66,13 @@ pipeline {
             echo "Build ${BUILD_NUMBER} FAILED — check the stage that went red"
         }
         always {
-            sh 'docker image prune -f'
+            sh '''
+	    docker images "simple-cicd" --format "{{.Tag}}" \
+	      | grep -E "^[0-9]+$" \
+	      | sort -n \
+	      | head -n -2 \
+	      | xargs -r -I {} docker rmi simple-cicd:{} || true
+	'''
         }
     }
 }
